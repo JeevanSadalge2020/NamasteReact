@@ -1,6 +1,55 @@
+// ## Namaste React Course by Akshay Saini
+// Chapter 04 - Talk is Cheap, show me the code
+
 import React from "react";
 import ReactDOM from "react-dom/client";
+import FoodFireLogo from "../Images/Food Fire Logo.png";
 
+/* My Food App structure will look like this, 
+            1) Header
+                - Logo
+                - Nav Items(right side)
+                - Cart
+            2) Body
+                - Search bar
+                - Restaurants List
+                    - Restaurant card
+                        - Image
+                        - Name
+                        - Rating
+            3) Footer
+                - Links
+                - Copyrights
+       
+*/
+
+// Title component for display logo
+const Title = () => (
+  <a href="/">
+    <img className="logo" src={FoodFireLogo} alt="Food Fire Logo" />
+  </a>
+);
+
+// Header component for header section: Logo, Nav Items
+const Header = () => {
+  return (
+    <div className="header">
+      <Title />
+      <div className="nav-items">
+        <ul>
+          <li>Home</li>
+          <li>About</li>
+          <li>Contact</li>
+          <li>
+            <i class="fa-solid fa-cart-shopping"></i>
+          </li>
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+// RestaurantList is JSON Data for displaying cards
 const restaurantList = [
   {
     type: "restaurant",
@@ -1819,85 +1868,80 @@ const restaurantList = [
   },
 ];
 
-const Header = () => {
+// Restaurant card component: Image, name, cuisine
+const RestaurantCard = ({
+  cloudinaryImageId,
+  name,
+  cuisines,
+  area,
+  lastMileTravelString,
+  costForTwoString,
+  avgRating,
+}) => {
   return (
-    <header className="pd-y-1">
-      <div className="header-container container">
-        <nav className="navbar">
-          <div className="logo-div">
-            <img
-              className="logo"
-              src="https://images.unsplash.com/photo-1557053964-937650b63311?q=80&w=1597&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            />
-          </div>
-          <ul>
-            <li>Home</li>
-            <li>About</li>
-            <li>Cart</li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-  );
-};
-
-const RestCard = (props) => {
-  console.log(props);
-  let { name, avgRating, cuisines, cloudinaryImageId, costForTwo } = props;
-  return (
-    <article className="restaurant-card">
-      <div className="restaurant-card-image-container">
-        <img
-          src={
-            "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/" +
-            cloudinaryImageId
-          }
-          alt="NONE"
-          className="restaurant-card-image"
-        />
-      </div>
-      <div className="restaurant-card-details">
-        <h3 className="restaurant-card-title">{name}</h3>
-        <p className="restaurant-card-menu">{cuisines.join(", ")}</p>
-        <div className="restaurant-card-other-details">
-          <p>Rating: {avgRating}</p>
-          <span>Rs.{costForTwo / 100} (For Two)</span>
-        </div>
-      </div>
-    </article>
-  );
-};
-
-const Main = () => {
-  return (
-    <main className="pd-y-2 container">
-      <div className="restaurant-search">
-        <input
-          type="text"
-          name="rest-search"
-          id="rest-search"
-          placeholder="Enter restaurant name"
-        />
-        <button>Search</button>
-      </div>
-      <div className="restaurant-cards-container">
-        {restaurantList.map((rest) => (
-          <RestCard key={rest.data.id} {...rest.data}></RestCard>
-        ))}
-      </div>
-    </main>
-  );
-};
-
-const App = () => {
-  return (
-    <div>
-      <Header></Header>
-      <Main></Main>
+    <div className="card">
+      <img
+        src={
+          "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/" +
+          cloudinaryImageId
+        }
+      />
+      <h2>{name}</h2>
+      <h4>{cuisines.join(", ")}</h4>
+      <h4>{area}</h4>
+      <span>
+        <h4>
+          <i class="fa-solid fa-star"></i>
+          {avgRating}
+        </h4>
+        <h4>{lastMileTravelString}</h4>
+        <h4>{costForTwoString}</h4>
+      </span>
     </div>
   );
 };
 
-const root = ReactDOM.createRoot(document.querySelector(".root"));
+// Body Component for body section: It contain all restaurant cards
+// We are mapping restaurantList array and passing data to RestaurantCard component as props with unique key as index
+const Body = () => {
+  return (
+    <div className="restaurant-list">
+      {restaurantList.map((restaurant) => {
+        return <RestaurantCard key={restaurant.data.id} {...restaurant.data} />;
+      })}
+    </div>
+  );
+};
 
-root.render(<App />);
+// Footer component for footer section
+const Footer = () => {
+  const year = new Date().getFullYear();
+  return (
+    <div className="footer">
+      Created By
+      <i class="fa-solid fa-heart"></i>
+      <a href="https://www.linkedin.com/in/chetannada/" target="_blank">
+        Chetan Nada
+      </a>
+      <i class="fa-solid fa-copyright"></i>
+      {year}
+      <strong>
+        Food<span>Fire</span>
+      </strong>
+    </div>
+  );
+};
+
+// AppLayout component to show: Header, Body, Footer
+const AppLayout = () => {
+  return (
+    <React.Fragment>
+      <Header />
+      <Body />
+      <Footer />
+    </React.Fragment>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<AppLayout />);
