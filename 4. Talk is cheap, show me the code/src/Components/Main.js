@@ -1,4 +1,5 @@
 import restaurantList from "../utils/data";
+import restaurants from "../utils/restData.json";
 import RestCard from "../Components/RestCard";
 
 import { useState } from "react";
