@@ -9,24 +9,9 @@ import { useState, useEffect } from "react";
 const Main = () => {
   let [restaurantList, setRestaurantList] = useState([]);
 
-  useEffect(() => {
-    async function get_data_from_swiggy() {
-      const response = await fetch(SWIGGY_URL);
-      const json = await response.json();
-      let data = json.data;
-      return data;
-    }
+  useEffect(() => fetch_data_from_api(), []);
 
-    get_data_from_swiggy().then((res) => {
-      let cards = res.cards;
-      let restaurants =
-        cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
-      console.log(restaurants);
-      setRestaurantList(restaurants);
-    });
-  }, []);
-
-  if (restaurantList.length === 0) {
+  if (restaurantList?.length === 0) {
     return <h1>Loading</h1>;
   } else
     return (
@@ -54,6 +39,20 @@ const Main = () => {
       (rest) => Number(rest.info.avgRating) > 4.2
     );
     setRestaurantList(restaurantList);
+  }
+
+  function fetch_data_from_api() {
+    fetch(SWIGGY_URL)
+      .then((res) => res.json())
+      .then((res) => {
+        let cards = res.data.cards;
+        let restaurants =
+          cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+        setRestaurantList(restaurants);
+      })
+      .catch((err) => {
+        setRestaurantList([]);
+      });
   }
 };
 
