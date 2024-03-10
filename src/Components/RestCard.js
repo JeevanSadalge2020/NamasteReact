@@ -13,10 +13,10 @@ const RestCard = (props) => {
       </div>
       <div className="restaurant-card-details">
         <h3 className="restaurant-card-title">{name}</h3>
-        <p className="restaurant-card-menu">{cuisines.join(", ")}</p>
+        <p className="restaurant-card-menu">{cuisines?.join(", ")}</p>
         <div className="restaurant-card-other-details">
           <p>Rating: {avgRating}</p>
-          <span>Rs.{costForTwo / 100} (For Two)</span>
+          <span>{costForTwo}</span>
         </div>
       </div>
     </article>
