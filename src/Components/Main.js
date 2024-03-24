@@ -23,15 +23,12 @@ const Main = () => {
             id="rest-search"
             placeholder="Enter restaurant name"
           />
-          <button>Search</button>
-          <button onClick={filterList}>Filter</button>
+          <button className="btn">Search</button>
+          <button className="btn" onClick={filterList}>
+            Filter
+          </button>
         </div>
         <div className="restaurant-cards-container">
-          <Shimmer />
-          <Shimmer />
-          <Shimmer />
-          <Shimmer />
-          <Shimmer />
           <Shimmer />
           <Shimmer />
           <Shimmer />
@@ -49,8 +46,10 @@ const Main = () => {
             id="rest-search"
             placeholder="Enter restaurant name"
           />
-          <button>Search</button>
-          <button onClick={filterList}>Filter</button>
+          <button className="btn">Search</button>
+          <button className="btn" onClick={filterList}>
+            Filter
+          </button>
         </div>
         <div className="restaurant-cards-container">
           {restaurantList.map((rest) => (

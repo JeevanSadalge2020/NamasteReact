@@ -1,6 +1,12 @@
 import { LOGO_URL } from "../utils/constants";
+import { useState } from "react";
 
 const Header = () => {
+  const [button, setButton] = useState("Login");
+
+  function handleButtonClick() {
+    setButton("Logout");
+  }
   return (
     <header className="pd-y-1">
       <div className="header-container container">
@@ -12,6 +18,15 @@ const Header = () => {
             <li>Home</li>
             <li>About</li>
             <li>Cart</li>
+            <button
+              className="btn"
+              onClick={(e) => {
+                handleButtonClick();
+                e.target.classList.add("btn-logout");
+              }}
+            >
+              {button}
+            </button>
           </ul>
         </nav>
       </div>

@@ -37,6 +37,24 @@ header {
     padding: 2rem 0;
 }
 
+.btn {
+    padding: 10px 20px;
+    border: none;
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border-radius: 2px;
+    font-size: 1.1rem;
+    letter-spacing: 1.5;
+    border: 1px solid var(--primary-color);
+    transition: all 0.15s ease-in-out;
+}
+
+.btn:hover {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    cursor: pointer;
+}
+
 header .header-container {
     min-width: 600px;
 }
@@ -84,24 +102,6 @@ header .navbar ul li:hover {
     outline: none;
     padding: 0.5rem 1rem;
     border: 1px solid var(--secondary-color);
-}
-
-.restaurant-search button {
-    padding: 10px 20px;
-    border: none;
-    background-color: var(--primary-color);
-    color: var(--light-color);
-    border-radius: 2px;
-    font-size: 1.1rem;
-    letter-spacing: 1.5;
-    border: 1px solid var(--primary-color);
-    transition: all 0.15s ease-in-out;
-}
-
-.restaurant-search button:hover {
-    background-color: var(--light-color);
-    color: var(--dark-color);
-    cursor: pointer;
 }
 
 .restaurant-cards-container {
@@ -152,4 +152,8 @@ header .navbar ul li:hover {
 
 .shimmerCard {
     background-color: #f9f9f9;
+}
+
+.btn-logout {
+    background-color: var(--dark-color);
 }
