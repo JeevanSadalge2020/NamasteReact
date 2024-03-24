@@ -149,3 +149,7 @@ header .navbar ul li:hover {
     display: flex;
     justify-content: space-between;
 }
+
+.shimmerCard {
+    background-color: #f9f9f9;
+}
